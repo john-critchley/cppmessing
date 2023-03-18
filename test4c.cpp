@@ -18,20 +18,20 @@ public:
 	virtual ~a()
 	{	printf("%s %d %s\n", __PRETTY_FUNCTION__, __LINE__, __FILE__);
 	}
-	virtual void print(void)
+	virtual void print(void) const
 		= 0;
 	const class a & me(void) const
 	{	printf("%s %d %s\n", __PRETTY_FUNCTION__, __LINE__, __FILE__);
 		return *this;
 	}
-	virtual class a * another(void)
+	virtual class a * another(void) const
 		= 0;
 } * my_a_type;
 class ab:public a
 {
 	time_t tm;
 public:
-	void print(void)
+	void print(void) const
 	{	puts("AB");
 		printf("%ld\n", tm);
 	}
@@ -46,14 +46,14 @@ public:
 	~ab()
 	{	printf("%s %d %s\n", __PRETTY_FUNCTION__, __LINE__, __FILE__);
 	}
-	virtual class a * another(void)
+	virtual class a * another(void) const
 	{	return new ab(*this);
 	}
 };
 class ac:public a
 {
 public:
-	void print(void)
+	void print(void) const
 	{	puts("AC");
 	}
 	ac(const class ac & that)
@@ -65,7 +65,7 @@ public:
 	~ac()
 	{	printf("%s %d %s\n", __PRETTY_FUNCTION__, __LINE__, __FILE__);
 	}
-	virtual class a * another(void)
+	virtual class a * another(void) const
 	{	return new ac();
 	}
 };
